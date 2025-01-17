@@ -1,33 +1,42 @@
 import os
+import pandas as pd
 
-def detectar_formato(archivo):
-    """Detecta el número de columnas y el delimitador en la primera línea válida de un archivo."""
-    with open(archivo, 'r', encoding='utf-8') as f:
-        for linea in f:
-            if linea.strip() and not linea.startswith('#'):  # Ignorar líneas vacías o comentarios
-                delimitador = next((d for d in [',', '\t', ';', ' '] if d in linea), None)
-                if delimitador:
-                    columnas = len(linea.split(delimitador))
-                    return columnas, delimitador
-    return None, None
+def limpiar_datos_carpeta(ruta_carpeta):
+  
+    if not os.path.isdir(ruta_carpeta):
+        print(f"La ruta {ruta_carpeta} no es una carpeta válida.")
+        return
 
-def verificar_formato_carpeta(carpeta):
-    """Verifica si todos los archivos de una carpeta tienen el mismo formato."""
-    archivos = [os.path.join(carpeta, f) for f in os.listdir(carpeta) if os.path.isfile(os.path.join(carpeta, f))]
-    formatos = []
+    archivos = [os.path.join(ruta_carpeta, archivo) for archivo in os.listdir(ruta_carpeta) if archivo.endswith('.dat')]
+
+    if not archivos:
+        print(f"No se encontraron archivos .dat en la carpeta {ruta_carpeta}.")
+        return
 
     for archivo in archivos:
-        columnas, delimitador = detectar_formato(archivo)
-        if columnas and delimitador:
-            formatos.append((columnas, delimitador))
-            print(f"{archivo}: {columnas} columnas, delimitador '{delimitador}'")
-        else:
-            print(f"{archivo}: No se pudo determinar el formato.")
+        print(f"\nProcesando archivo: {archivo}")
+        try:
+            df = pd.read_csv(archivo, encoding='utf-8', sep=None, engine='python')
+            print("Archivo cargado correctamente.")
 
-    if len(set(formatos)) == 1:
-        print("\nTodos los archivos tienen el mismo formato.")
-    else:
-        print("\nLos archivos tienen formatos diferentes.")
+            tipos_originales = df.dtypes
+            print("Tipos originales de las columnas:")
+            print(tipos_originales)
+
+            print("Valores faltantes antes de limpieza:")
+            print(df.isnull().sum())
+
+            df = df.fillna(method='ffill').fillna(method='bfill')
+
+            print("Valores faltantes después de limpieza:")
+            print(df.isnull().sum())
+
+            archivo_salida = archivo.replace('.dat', '_limpio.dat')
+            df.to_csv(archivo_salida, index=False, encoding='utf-8', sep='\t')
+            print(f"Archivo limpio guardado como: {archivo_salida}")
+
+        except Exception as e:
+            print(f"Error procesando el archivo {archivo}: {e}")
 
 ruta_carpeta = "/workspaces/TA06_Grupo5/prueba"
-verificar_formato_carpeta(ruta_carpeta)
+limpiar_datos_carpeta(ruta_carpeta)
