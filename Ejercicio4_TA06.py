@@ -2,7 +2,6 @@ import os
 import pandas as pd
 
 def analizar_datos_documentado(ruta_carpeta):
-    
     if not os.path.isdir(ruta_carpeta):
         print(f"La ruta {ruta_carpeta} no es una carpeta válida.")
         return
@@ -13,14 +12,12 @@ def analizar_datos_documentado(ruta_carpeta):
         print(f"No se encontraron archivos .dat en la carpeta {ruta_carpeta}.")
         return
 
+    total_valores_procesados = 0
+
     for archivo in archivos:
         print(f"\nProcesando archivo: {archivo}")
         try:
             df = pd.read_csv(archivo, encoding='utf-8', sep='\t', engine='python')
-
-            print("\n=== Documentación del proceso ===")
-            print("1. Los valores '-999' se consideran datos faltantes y se reemplazan por NaN.")
-            print("2. Los valores nulos se rellenan usando la media de la columna correspondiente.")
 
             df.replace(-999, pd.NA, inplace=True)
 
@@ -65,8 +62,12 @@ def analizar_datos_documentado(ruta_carpeta):
                 max_variacion = tasa_variacion.abs().max()
                 print(f"\nMáxima variación interanual: {max_variacion:.2f}%")
 
+            total_valores_procesados += df.size
+
         except Exception as e:
             print(f"Error procesando el archivo {archivo}: {e}")
 
-ruta_carpeta = "/workspaces/TA06_Grupo5/prueba"
+    print(f"\nTotal de valores procesados en todos los archivos: {total_valores_procesados}")
+
+ruta_carpeta = "/workspaces/TA06_Grupo5/no"
 analizar_datos_documentado(ruta_carpeta)
