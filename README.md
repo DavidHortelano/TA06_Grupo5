@@ -11,7 +11,10 @@ Bienvenido al manual del TA06_Grup5
 <!-- Ejercicio 1 -->
 # Ejercicio 1
 ## Obtencion de datos
+ - Pra obtener los datos hemos investigado en una pagina  muy fiable de datos meteorologicos.
+ [AEMET](https://opendata.aemet.es/centrodedescargas/productosAEMET)
 
+![Precipitaciones](imagenes/preci.png) 
 
 
 ---
