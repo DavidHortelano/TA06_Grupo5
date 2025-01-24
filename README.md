@@ -1,11 +1,11 @@
 Bienvenido al manual del TA06_Grup5
 ---
-## Indice
-1. [Obtencion de datos](#ejercicio-)
-2. [Organizar y procesar datos](#)
-3. [Generar resultados](#inteligència-artificial-en-suport-tècnic)
-4. [Publicar los resultados](#ia-para-redes)
-5. [Reflexion](#ia-para-redes)
+## Indice1
+1. [Obtencion de datos](#ejercicio-1)
+2. [Organizar y procesar datos](#ejercicio-2)
+3. [Generar resultados](#ejercicio-3)
+4. [Publicar los resultados](#ejercicio-4)
+5. [Reflexion](#ejercicio-5)
 
 ---
 <!-- Ejercicio 1 -->
