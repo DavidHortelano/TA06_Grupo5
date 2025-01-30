@@ -86,5 +86,5 @@ def analizar_carpeta(ruta_carpeta):
         print(f"\n--- {archivo} ---")
         analizar_archivo(archivo)
 
-ruta_carpeta = "/workspaces/TA06_Grupo5/prueba" 
+ruta_carpeta = "../prueba" 
 analizar_carpeta(ruta_carpeta)

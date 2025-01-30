@@ -64,5 +64,5 @@ def analizar_datos_documentado(ruta_carpeta):
     print(f"\nTotal de valores procesados en todos los archivos: {total_valores_procesados}")
 
 # Ejecutar la función
-ruta_carpeta = "/workspaces/TA06_Grupo5/prueba"
+ruta_carpeta = "../prueba"
 analizar_datos_documentado(ruta_carpeta)

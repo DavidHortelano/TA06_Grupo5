@@ -29,5 +29,5 @@ def verificar_formato_carpeta(carpeta):
     else:
         print("\nLos archivos tienen formatos diferentes.")
 
-ruta_carpeta = "/workspaces/TA06_Grupo5/prueba"
+ruta_carpeta = "../prueba"
 verificar_formato_carpeta(ruta_carpeta)

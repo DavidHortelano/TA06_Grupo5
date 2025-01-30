@@ -38,5 +38,5 @@ def limpiar_datos_carpeta(ruta_carpeta):
         except Exception as e:
             print(f"Error procesando el archivo {archivo}: {e}")
 
-ruta_carpeta = "/workspaces/TA06_Grupo5/prueba"
+ruta_carpeta = "../prueba"
 limpiar_datos_carpeta(ruta_carpeta)
